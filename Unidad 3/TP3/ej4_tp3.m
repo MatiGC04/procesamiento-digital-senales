@@ -82,6 +82,25 @@ bar(k, parecido2)
 xlabel("k")
 ylabel("Grado de parecido")
 
+% En conclusión, el producto interno es un operador que mide la proyección 
+% de un vector sobre otro. Al aparecer un desfase φ_k, estamos rotando el 
+% vector de la señal respecto a nuestra base s_k. Por lo tanto, el gráfico 
+% de barras deja de representar el módulo (el peso real β_k) y pasa a 
+% representar la proyección escalar, la cual se ve atenuada o invertida 
+% por el factor cos(φ_k).
+
+
+
+
+
+
+
+
+
+
+
+
+
 # 4.3
 #realice el grafico de barras para el caso de una señal cuadrada de 5,5Hz.
 
@@ -110,3 +129,18 @@ clf
 bar(k, parecido3)
 xlabel("k")
 ylabel("Grado de parecido")
+
+% CONCLUSIONES ITEM C
+% La onda cuadrada de 5.5 Hz no puede ser representada exactamente por ninguna
+% de las senoidales de la grilla de 1 a 10 Hz, ya que sus armonicos naturales
+% (5.5, 16.5, 27.5 Hz...) no coinciden con ninguna frecuencia de dicha grilla.
+% Esto se refleja en el grafico de barras: no hay un pico claro en ninguna
+% frecuencia particular, sino que el parecido aparece distribuido entre varias.
+
+
+% Esto es consecuencia directa de la ortogonalidad de las senoidales:
+% si la frecuencia necesaria no esta en la base de comparacion, la energia
+% de la señal se "derrama" sobre las frecuencias disponibles sin concentrarse
+% en ninguna. En terminos de espacios vectoriales, es equivalente al caso de
+% base no completa: si el conjunto de senoidales no incluye las frecuencias
+% de la señal a representar, siempre existira un error de aproximacion.
