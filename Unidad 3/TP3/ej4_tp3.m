@@ -68,9 +68,10 @@ display(" 4.2 - grado de parecido")
 parecido2 = zeros(1, length(k));
 for i = 1:length(k)
   % comparamos X2 contra S (no contra Z)
-  parecido2(i) = producto_interno(X2, S(i,:)) / producto_interno(S(i,:), S(i,:));
+  #parecido2(i) = producto_interno(X2, S(i,:)) / producto_interno(S(i,:), S(i,:));
+  parecido2(i) = producto_interno(X2, S(i,:)) / norma_p(S(i,:),2)*norma_p(X2,2); 
+  % normalizo por la norma 2 para obtener el grado de parecido entre X2 y S(i,:);
 end
-parecido2'
 figure(2)
 clf
 bar(k, parecido2)
@@ -95,7 +96,8 @@ title("Señal Cuadrada de 5.5 Hz")
 display(" 4.3 - grado de parecido")
 parecido3 = zeros(1, length(k));
 for i = 1:length(k)
-  parecido3(i) = producto_interno(y, S(i, :))/producto_interno(S(i,:), S(i,:));
+  parecido3(i) = producto_interno(y, S(i, :))/norma_p(S(i,:),2)*norma_p(y,2); 
+   % normalizo por la norma 2 para obtener el grado de parecido entre y y S(i,:);
 end
 fprintf("\n\n")
 parecido3'
