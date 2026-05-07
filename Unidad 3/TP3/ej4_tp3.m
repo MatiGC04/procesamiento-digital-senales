@@ -50,7 +50,9 @@ ylabel("Grado de parecido")
 # 4.2
 % armo el conjunto Z = {z_k(t)/ z_k(t) = sin(2pi*k*t + fase_k), k[1,10]}
 
-fase = [pi, pi/10, pi/5, 3*pi/10, 2*pi/5, 5*pi/10, 3*pi/5, 7*pi/10, 4*pi/5, 9*pi/10];
+#fase = [pi, pi/10, pi/5, 3*pi/10, 2*pi/5, 5*pi/10, 3*pi/5, 7*pi/10, 4*pi/5, 9*pi/10];
+fase =        [pi/7, pi*2/7,  pi/4, 3*pi/9, pi/2, pi, pi/3, pi/3.5, pi/6, 2*pi/1.5];  % item b: con fase
+
 Z = zeros(length(k), length(t));
 for j = 1: length(k)
   Z(j, :) = sin(2*pi*k(j)*t + fase(j));
@@ -81,10 +83,9 @@ ylabel("Grado de parecido")
 # 4.3
 #realice el grafico de barras para el caso de una señal cuadrada de 5,5Hz.
 
-fs = 5.5; % frecuencia de la señal cuadrada
-[tc,y] = generaondacuadrada(tini,tfin,1000,fs,0,1);
+[tc,y] = generaondacuadrada(tini,tfin,1000,5.5,0,1);
 display(" 4.3 - señal cuadrada")
-y
+
 figure(4)
 plot(tc,y, "LineWidth", 2)
 xlabel("Tiempo (s)")
