@@ -5,7 +5,7 @@ k = 1:10;
 # El conjunto S = {s_k(t)/ s_k(t) = sin(2pi*k*t), k[1,10]}
 tini = 0;
 tfin = 1;
-t = linspace(tini, tfin, 1000);
+#t = linspace(tini, tfin, 1000);
 fm = 1000; % frecuencia de muestreo
 
 a = 0.1:0.1:1;
@@ -39,7 +39,7 @@ for i = 1:length(k)
   parecido(i) = producto_interno(X1, S(i, :))/producto_interno(S(i,:), S(i,:)); % el pdf dice que al dividir por al norma 2 se obtiene el grado de parecido
 end
 fprintf("\n\n")
-parecido'
+parecido';
 figure(1)
 clf
 bar(k, parecido)
