@@ -1,40 +1,61 @@
-#Ejercicio 2: Compruebe que el producto interno mide el grado de parecido entre
-#dos se˜nales dadas. Para ello, genere dos se˜nales senoidales y realice el produc
-#to interno entre ellas. Eval´ue el efecto que producen los distintos par´ametros
-#(A,f,φ) sobre el c´alculo del producto interno.
-addpath('../../../Funciones');
+# Ejercicio 2: Compruebe que el producto interno mide el grado de parecido entre
+# dos señales dadas. Para ello, genere dos señales senoidales y realice el
+# producto interno entre ellas. Evalúe el efecto que producen los distintos
+# parámetros (A, f, φ) sobre el cálculo del producto interno.
+addpath('../../Funciones');
 clc;
-
-
-
-# Genero dos señales de misma frecuencia y amplitud pero distinta fase
-A = 1;
-f = 0.5;
-fase1 = 0;
-
-fm = 10;
 
 tini = 0;
 tfin = 20;
+fm   = 10;
 
-[ts1,s1] = generasenoidal(tini,tfin,fm,f,fase1,A);
-fase2 = pi/4; # cambio la fase de la segunda señal
-[ts2,s2] = generasenoidal(tini,tfin,fm,f,fase2,A);
+# Señal de referencia fija
+f_fija    = 0.5;
+fase_fija = 0;
+A_fija    = 1;
+[ts2, s2] = generasenoidal(tini, tfin, fm, f_fija, fase_fija, A_fija);
+fprintf('Señal de referencia: A=%.1f  f=%.1f  phi=%.3f\n\n', A_fija, f_fija, fase_fija);
 
-# calculo el producto interno entre las dos señales
-resultado = producto_interno(s1, s2);
-fprintf('El producto interno entre las dos señales es: %f\n', resultado);
-plot(ts1, s1, 'b', ts2, s2, 'r');
+% Al duplicar A, el producto interno se duplica.
+% Esto confirma la linealidad del producto interno: <A*x1, x2> = A * <x1, x2>
+fprintf('=== EFECTO DE LA AMPLITUD (A) ===\n');
+amplitudes = [0.5, 1, 2, 4];
+for i = 1:length(amplitudes)
+    A = amplitudes(i);
+    [~, s1] = generasenoidal(tini, tfin, fm, f_fija, fase_fija, A);
+    pi_val = producto_interno(s1, s2);
+    fprintf('  A=%.1f -> producto interno = %.4f\n', A, pi_val);
+end
 
+% Cuando f1 == f2 el producto interno es máximo.
+% Cuando f1 != f2 el resultado tiende a ~0: señales de distinta frecuencia
+% son ortogonales en un período completo (no se "parecen").
+fprintf('\n=== EFECTO DE LA FRECUENCIA (f) ===\n');
+frecuencias = [0.1, 0.25, 0.5, 1.0, 1.5];
+for i = 1:length(frecuencias)
+    f1 = frecuencias(i);
+    [~, s1] = generasenoidal(tini, tfin, fm, f1, fase_fija, A_fija);
+    pi_val = producto_interno(s1, s2);
+    fprintf('  f1=%.2f Hz -> producto interno = %.4f\n', f1, pi_val);
+end
 
-# genero dos señales de misma frecuencia y fase pero distinta amplitud
-A2 = 2; # cambio la amplitud de la segunda señal
-[ts3,s3] = generasenoidal(tini,tfin,fm,f,fase1,A2);
-resultado2 = producto_interno(s1, s3);
-fprintf('El producto interno entre las dos señales es: %f\n', resultado2);
+% El producto interno varía como cos(phi): máximo en phi=0 (señales idénticas),
+% cero en phi=pi/2 (señales ortogonales) y mínimo en phi=pi (señales opuestas).
+% Esto muestra que el producto interno mide el "alineamiento" entre señales.
+fprintf('\n=== EFECTO DE LA FASE (phi) ===\n');
+fases         = [0, pi/4, pi/2, 3*pi/4, pi];
+nombres_fases = {'0', 'pi/4', 'pi/2', '3pi/4', 'pi'};
+for i = 1:length(fases)
+    [~, s1] = generasenoidal(tini, tfin, fm, f_fija, fases(i), A_fija);
+    pi_val = producto_interno(s1, s2);
+    fprintf('  phi=%-6s -> producto interno = %.4f\n', nombres_fases{i}, pi_val);
+end
 
-# genero dos señales de distinta frecuencia pero misma amplitud y fase
-f2 = 1.10; # cambio la frecuencia de la segunda señal
-[ts4,s4] = generasenoidal(tini,tfin,fm,f2,fase1,A);
-resultado3 = producto_interno(s1, s4);
-fprintf('El producto interno entre las dos señales es: %f\n', resultado3);
+% El producto interno mide el grado de similitud entre dos señales, pero al variar
+% la amplitud el resultado cambia aunque la forma sea idéntica.
+% Esto se debe a que el producto interno depende tanto del ángulo entre las señales
+% (similitud de forma) como de sus normas (amplitudes).
+% Para medir similitud pura independiente de la amplitud se debería normalizar
+% por las normas (similitud coseno), pero el enunciado pide solo el producto interno.
+% Conclusión: el producto interno es una buena medida de similitud entre señales
+% siempre que se tenga en cuenta la norma/energía de las mismas.
