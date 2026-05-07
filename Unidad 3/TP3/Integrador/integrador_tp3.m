@@ -101,3 +101,12 @@ fprintf("Error Cuadrático Total entre la señal original y su aproximación: %.
 % y la aproximación de la señal sobre esa referencia sería nula.
 % Geométricamente, ambas señales están en ángulo recto (θ=90°), 
 % por lo que cos(θ)=0 y no hay componente proyectable de una sobre la otra.
+
+[ty2,y2] = generasenoidal(0,(N)/fm,fm,100,pi/2,1); % señal de referencia
+
+producto_int_fase_90 = producto_interno(x,y2);
+coseno_x_y2 = producto_int_fase_90/(norma_p(x,2)*norma_p(y2,2)); % coseno del angulo entre x e
+
+angulo_entre_y2_x = acos(coseno_x_y2)*180/pi; % angulo entre x e y2 en grados
+
+fprintf("\n\n El angulo entre X e Y2 (con fase de 90°) es: %.2f grados\n", angulo_entre_y2_x);
