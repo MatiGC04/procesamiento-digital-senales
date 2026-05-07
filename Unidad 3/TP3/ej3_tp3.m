@@ -1,6 +1,5 @@
-% ============================================================
+addpath('../../Funciones'); % para usar el integrador del TP3
 % EJ3 TP3 - Aproximacion con funciones de Legendre
-% ============================================================
 
 N_puntos = 1000;
 t  = linspace(-1, 1, N_puntos);
@@ -112,4 +111,5 @@ hold on;
 plot(t, y_aprox_acc, 'r--', 'LineWidth', 1.5, 'DisplayName', sprintf('Aprox N=%d', N_max));
 xlabel('t'); ylabel('Amplitud');
 title(sprintf('3.3 - Aproximacion con %d funciones de Legendre', N_max));
-legend show; grid on;
+#legend show;
+grid on;
