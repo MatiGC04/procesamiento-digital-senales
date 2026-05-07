@@ -35,4 +35,5 @@ end
 # busco el tono maximo, es decir el que mas se parezca al tono la
 [valor_maximo, indice_maximo] = max(correlacion);
 
-disp(['El tono más parecido a La4 es el segmento ', num2str(indice_maximo), ' con una correlación de ', num2str(valor_maximo)]);
+disp(['El tono más parecido a La es el segmento ', num2str(indice_maximo), ' con una correlación de ', num2str(valor_maximo)]);
+
