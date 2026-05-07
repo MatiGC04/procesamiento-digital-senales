@@ -84,10 +84,10 @@ disp(min(s_aleatoria));
 
 # Encontrar Amplitud
 
-amplitud_s = (max(s) - min(s))/2;
-amplitud_r = (max(r) - min(r))/2;
-amplitud_c = (max(c) - min(c))/2;
-amplitud_s_aleatoria = (max(s_aleatoria) - min(s_aleatoria))/2;
+amplitud_s = norma_p(s,Inf); # la norma con p=inf es el maximo valor absoluto de la señal
+amplitud_r = norma_p(r,Inf);
+amplitud_c = norma_p(c,Inf);
+amplitud_s_aleatoria = norma_p(s_aleatoria,Inf);
 display('La amplitud de la señal senoidal es:');
 disp(amplitud_s);
 display('La amplitud de la señal rampa es:');
@@ -99,10 +99,10 @@ disp(amplitud_s_aleatoria);
 
 # Encontrar energia, seria la norma con p=2
 p = 2;
-energia_s = norma_p(s,p);
-energia_r = norma_p(r,p);
-energia_c = norma_p(c,p);
-energia_s_aleatoria = norma_p(s_aleatoria,p);
+energia_s = (norma_p(s,p))^2;
+energia_r = (norma_p(r,p))^2;
+energia_c = (norma_p(c,p))^2;
+energia_s_aleatoria = (norma_p(s_aleatoria,p))^2;
 display('La energia de la señal senoidal es:');
 disp(energia_s);
 display('La energia de la señal rampa es:');
