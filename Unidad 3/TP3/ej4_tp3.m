@@ -6,14 +6,16 @@ k = 1:10;
 tini = 0;
 tfin = 1;
 t = linspace(tini, tfin, 1000);
-
+fm = 1000; % frecuencia de muestreo
 
 a = 0.1:0.1:1;
 
 # armo el conjunto s
-S = zeros(length(a), length(t));
+t = tini:1/fm:tfin-1/fm; % tiempo de muestreo
+S = zeros(length(k), length(t));
 for j = 1: length(k)
-  S(j, :) = sin(2*pi*k(j)*t);
+  [~,y_sen]= generasenoidal(tini, tfin, fm, k(j), 0, 1);
+  S(j, :) = y_sen;
 end
 
 # 4.1
@@ -83,11 +85,11 @@ ylabel("Grado de parecido")
 # 4.3
 #realice el grafico de barras para el caso de una señal cuadrada de 5,5Hz.
 
-[tc,y] = generaondacuadrada(tini,tfin,1000,5.5,0,1);
+[tc,yc] = generaondacuadrada(tini,tfin,1000,5.5,0,1);
 display(" 4.3 - señal cuadrada")
 
 figure(4)
-plot(tc,y, "LineWidth", 2)
+plot(tc,yc, "LineWidth", 2)
 xlabel("Tiempo (s)")
 ylabel("Amplitud")
 title("Señal Cuadrada de 5.5 Hz")
@@ -97,9 +99,10 @@ title("Señal Cuadrada de 5.5 Hz")
 display(" 4.3 - grado de parecido")
 parecido3 = zeros(1, length(k));
 for i = 1:length(k)
-  parecido3(i) = producto_interno(y, S(i, :))/norma_p(S(i,:),2)*norma_p(y,2); 
-   % normalizo por la norma 2 para obtener el grado de parecido entre y y S(i,:);
+  parecido3(i) = producto_interno(yc, S(i, :)) / (norma_p(S(i,:),2) * norma_p(yc,2));   % normalizo por la norma 2 para obtener el grado de parecido entre y y S(i,:);
 end
+
+
 fprintf("\n\n")
 parecido3'
 figure(3)
