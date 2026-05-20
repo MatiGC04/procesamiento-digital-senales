@@ -43,9 +43,14 @@ s_positiva = S_k(1:N/2); % parte positiva de la FFT
 S_k_ajustada = [s_negativa, s_positiva]; % ajusto el espectro frecuencial
 
 
+% como armo el eje de frecuencia para ajustar el espectro ajustado?
+eje_f = -N/2:N/2-1; % eje de frecuencia ajustado, con el mismo número de muestras que S_k_ajustada
+
 % Gráfico en el dominio de la frecuencia (TDF) ajustado
 subplot(3,1,3);
-plot(-N/2:N/2-1, abs(S_k_ajustada));
+
+
+plot(eje_f, abs(S_k_ajustada));
 xlabel('Índice k');
 ylabel('Magnitud |S[k]|');
 title('Espectro de magnitud de S[k] ajustado');
