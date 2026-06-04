@@ -54,8 +54,6 @@
 % 5. Truncado temporal (ventanas temporales)
 % 6. Corrección de amplitud (si se atenuó por demás)
 
-
-%% coDIGO DEL PROFESOR:
 fm=300; %frecuencia de muestreo
 fr=50; %frecuencia de rechazo
 
@@ -71,6 +69,7 @@ n1=fix(fr/df); %calculo a que muestra corresponde la frecuencia fr
 np=n1+1; %le sumo 1 para compensar el indexado desde 1
 %nn=M-n1+1; %calculo la muestra en la que aparaece en la parte de frecuencias negativas
 
+% ceil redondea hacia arriba
 nm=ceil(2/df) %numero de muestras para cada lado correspondiente a 2Hz para cada lado
 
 MD(np-nm:np+nm)=0; %Pongo ceros en la frecuencia deseada y una muestra para cada lado (ancho de banda de rechazo =4 HZ)
@@ -103,4 +102,4 @@ hf=h(1:N).*blackman(N).';
 
 stem(hf)
 hold on
-freqz(hf,1,1000,fm);
+freqz(hf,1,1000,fm); % con freqz veo la respuesta del filtro en frecuencia.

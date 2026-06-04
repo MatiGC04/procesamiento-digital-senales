@@ -29,7 +29,7 @@ MD = zeros(1, M+1);
 
 % banda 1: [100, 200] Hz con magnitud 1
 % para pasar de freq a indice: k = fix(f/df) + 1
-k1_ini = fix(100/df) + 1;
+k1_ini = fix(100/df) + 1; # fix trunca
 k1_fin = fix(200/df) + 1;
 MD(k1_ini : k1_fin) = 1;
 fprintf('Banda 1: indices %d a %d (%.1f a %.1f Hz)\n', k1_ini, k1_fin, (k1_ini-1)*df, (k1_fin-1)*df);
