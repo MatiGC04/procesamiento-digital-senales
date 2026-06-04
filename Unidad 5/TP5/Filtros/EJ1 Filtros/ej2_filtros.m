@@ -64,6 +64,8 @@ xlim([0 fm/2])
 % exp(-j*w*d), en el tiempo h[n] se corre d muestras
 % uso d = (N-1)/2 para q quede centrada en las primeras N muestras
 % es lo mismo q hace el profe en el ej1
+% La frecuencia en hz de la muestra k es fk = k* fm/Mtot
+% la dft trabaja con frecuencia normalizada es decir : wk = 2*pi(k/Mtot) [rad/muestra]
 ph = exp(-j*2*pi*((N-1)/2)*[0:M]/(MTot));
 
 % respuesta completa (magnitud * fase) para freq positivas
